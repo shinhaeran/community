@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}free의 detail{% endblock %} <!--얘는 그 head 에 쓰는 타이틀이에요-->
+
+{% block content %}
+    <p>free의 detail</p>
+    <a href="{% url 'free:edit' post.id %}">수정하기</a>
+    <a href="{% url 'free:delete' post.id %}">삭제하기</a>
+    <a href="{% url 'free:index' %}">목록으로</a>
+    {{post.title}}
+    {{post.content}}
+{% endblock %}

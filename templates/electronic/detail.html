@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}electronic의 detail{% endblock %} <!--얘는 그 head 에 쓰는 타이틀이에요-->
+
+{% block content %}
+    <p>electronic의 detail</p>
+    <a href="{% url 'electronic:edit' post.id %}">수정하기</a>
+    <a href="{% url 'electronic:delete' post.id %}">삭제하기</a>
+    <a href="{% url 'electronic:index' %}">목록으로</a>
+    {{post.title}}
+    {{post.content}}
+{% endblock %}

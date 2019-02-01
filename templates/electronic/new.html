@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}electronic의 new{% endblock %} <!--얘는 그 head 에 쓰는 타이틀이에요-->
+
+{% block content %}
+<p>electronic의 new</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="작성하기">
+</form>
+{% endblock %}
