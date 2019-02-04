@@ -3,7 +3,7 @@ from .models import AgriculturePost
 from .forms import AgriculturePostForm
 
 # Create your views here.
-
+#화이팅! 열일열일 ^^77
 def index(request):
     agricultureposts = AgriculturePost.objects.all
     return render(request, 'agriculture/index.html', {
