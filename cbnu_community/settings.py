@@ -65,7 +65,7 @@ ROOT_URLCONF = 'cbnu_community.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],      #베이스 디렉토리에 템플릿 폴더를 확인하라는 소리
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
