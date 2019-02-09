@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import AgriculturePost
 from .forms import AgriculturePostForm
+from django_summernote import models as summer_model
 
 # Create your views here.
-#화이팅! 열일열일 ^^77
 def index(request):
     agricultureposts = AgriculturePost.objects.all
     return render(request, 'agriculture/index.html', {
@@ -27,9 +27,10 @@ def new(request):
 
 def detail(request, post_id):
     post = get_object_or_404(AgriculturePost, pk=post_id)
-
+    multiFile = get_object_or_404(summer_model.Attachment, id = post_id)
     return render(request, 'agriculture/detail.html', {
         'post':post,
+        'multiFile':multiFile,
     })
 
 def edit(request, post_id):

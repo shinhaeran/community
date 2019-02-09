@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import BusinessPost
 from .forms import BusinessPostForm
+from django_summernote import models as summer_model
 
 def index(request):
     businessposts = BusinessPost.objects.all
@@ -25,9 +26,10 @@ def new(request):
 
 def detail(request, post_id):
     post = get_object_or_404(BusinessPost, pk=post_id)
-
+    multiFile = get_object_or_404(summer_model.Attachment, id = post_id)
     return render(request, 'business/detail.html', {
         'post':post,
+        'multiFile':multiFile,
     })
 
 def edit(request, post_id):
