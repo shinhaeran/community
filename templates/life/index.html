@@ -5,6 +5,6 @@
 {% block content %}
 life's index
 {% for post in posts %}
-    <p><a href="{% url 'agriculture:detail' post.id %}">{{post.title}}</a></p>
+    <p><a href="{% url 'life:detail' post.id %}">{{post.title}}</a></p>
 {% endfor %}
 {% endblock %}

@@ -27,6 +27,7 @@ def new(request):
 
 def detail(request, post_id):
     post = get_object_or_404(AgriculturePost, pk=post_id)
+    
     multiFile = get_object_or_404(summer_model.Attachment, id = post_id)
     return render(request, 'agriculture/detail.html', {
         'post':post,

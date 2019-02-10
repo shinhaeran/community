@@ -7,6 +7,7 @@
     <a href="{% url 'life:edit' post.id %}">수정하기</a>
     <a href="{% url 'life:delete' post.id %}">삭제하기</a>
     <a href="{% url 'life:index' %}">목록으로</a>
-    {{post.title}}
-    {{post.content}}
+    <h1>제목:{{post.title|safe}}</h1>
+    <h2>내용:{{post.content|safe}}</h2>
+    <hr>
 {% endblock %}

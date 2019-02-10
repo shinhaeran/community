@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import FreePost
 from .forms import FreePostForm
-
+from django_summernote import models as summer_model
 # Create your views here.
 
 def index(request):
@@ -27,9 +27,10 @@ def new(request):
 
 def detail(request, post_id):
     post = get_object_or_404(FreePost, pk=post_id)
-
+    multiFile = get_object_or_404(summer_model.Attachment, id = post_id)
     return render(request, 'free/detail.html', {
         'post':post,
+        'multiFile':multiFile,
     })
 
 def edit(request, post_id):

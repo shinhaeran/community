@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import SocialPost
 from .forms import SocialPostForm
+from django_summernote import models as summer_model
 
 # Create your views here.
 
@@ -26,9 +27,10 @@ def new(request):
 
 def detail(request, post_id):
     post = get_object_or_404(SocialPost, pk=post_id)
-
+    multiFile = get_object_or_404(summer_model.Attachment, id = post_id)
     return render(request, 'social/detail.html', {
         'post':post,
+        'multiFile':multiFile,
     })
 
 def edit(request, post_id):
