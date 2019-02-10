@@ -9,7 +9,7 @@ def index(request):
     return render(request, 'life/index.html', {
         'posts':lifeposts,
     })
-
+#ㅠ
 def new(request):
     if request.method == 'POST':
         form = LifePostForm(request.POST)
