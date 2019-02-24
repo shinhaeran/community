@@ -1,24 +1,105 @@
+{% load notification_tags %}
+{% load staticfiles %}
+{% load static %}
+{% include_notify_js_variables %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <!-- 자바스크립트 적용법 각 앱에 따로 지정해줘도 괜찮을 듯 -->
+  
+  <script src="{% static 'js/test.js' %}"></script>
+
+  <style>
+    /* Style the buttons */
+    .btn {
+      border: none;
+      outline: none;
+      padding: 10px 16px;
+      background-color: #f1f1f1;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    
+    /* Style the active class, and buttons on mouse-over */
+    .active, .btn:hover {
+      background-color: #666;
+      color: white;
+    }
+    </style>
+
 </head>
 <body>
   <main>
-    <a href="{% url 'home' %}">홈으로</a>
-    <a href="{% url 'agriculture:index' %}">농대</a>
-    <a href="{% url 'business:index' %}">경영대</a>
-    <a href="{% url 'electronic:index' %}">전자정보대</a>
-    <a href="{% url 'engineer:index' %}">공대</a>
-    <a href="{% url 'free:index' %}">자율전공</a>
-    <a href="{% url 'human:index' %}">인문대</a>
-    <a href="{% url 'life:index' %}">생활과학대</a>
-    <a href="{% url 'nature:index' %}">자연과학대</a>
-    <a href="{% url 'social:index' %}">사회과학대</a>
-    <a href="{% url 'teach:index' %}">사범대</a>
+   <ul class="notifications list-group">
+      {% render_notifications using user.notifications.active.prefetch for box %}
+    </ul>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid" >
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}">커뮤니티</a>
+      </div>
+  
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" >
+        <ul class="nav navbar-nav" id="myDIV">
+          <button class="btn"><a href="{% url 'agriculture:index' %}">농대</a></button>
+          <button class="btn"><a href="{% url 'business:index' %}">경영대</a></button>
+          <button class="btn"><a href="{% url 'electronic:index' %}">전자정보대</a></button>
+          <button class="btn"><a href="{% url 'engineer:index' %}">공대</a></button>
+          <button class="btn"><a href="{% url 'free:index' %}">자율전공</a></button>
+          <button class="btn"><a href="{% url 'human:index' %}">인문대</a></button>
+          <button class="btn"><a href="{% url 'life:index' %}">생활과학대</a></button>
+          <button class="btn"><a href="{% url 'nature:index' %}">자연과학대</a></button>
+          <button class="btn"><a href="{% url 'social:index' %}">사회과학대</a></button>
+          <button class="btn"><a href="{% url 'teach:index' %}"> 사범대 </a></button>
+
+          
+
+        </ul>
+        
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  
+
     {% block content %}
+
     {% endblock %}
   </main>
+
+
+  <!-- script inclusions -->
+  {% block extrascripts %}
+  
+  {% endblock %}
+  <!-- end script inclusions -->
+  
+
+
+
+  <script>
+    // Add active class to the current button (highlight it)
+    var header = document.getElementById("myDIV");
+    var btns = header.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+      var current = document.getElementsByClassName("active");
+      if (current.length > 0) { 
+        current[0].className = current[0].className.replace(" active", "");
+      }
+      this.className += " active";
+      });
+    }
+    </script>
+  
 </body>
 </html>

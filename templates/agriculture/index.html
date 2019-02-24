@@ -4,6 +4,9 @@
 
 {% block content %}
 agriculture's index
+{% for notice in notices %}
+    <p><a href="{% url 'agriculture:detail' notice.id %}">{{notice.title}}</a></p>
+{% endfor %}
 {% for post in posts %}
     <p><a href="{% url 'agriculture:detail' post.id %}">{{post.title}}</a></p>
 {% endfor %}

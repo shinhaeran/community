@@ -7,4 +7,7 @@ nature's index
 {% for post in posts %}
     <p><a href="{% url 'nature:detail' post.id %}">{{post.title}}</a></p>
 {% endfor %}
+{% for post in posts %}
+    <p><a href="{% url 'nature:detail' post.id %}">{{post.title}}</a></p>
+{% endfor %}
 {% endblock %}
