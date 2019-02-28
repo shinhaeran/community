@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
   {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <!-- 자바스크립트 적용법 각 앱에 따로 지정해줘도 괜찮을 듯 -->
   
@@ -34,39 +35,36 @@
 </head>
 <body>
   <main>
-   <ul class="notifications list-group">
+    <ul class="notifications list-group">
       {% render_notifications using user.notifications.active.prefetch for box %}
     </ul>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid" >
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-        <a class="navbar-brand" href="{% url 'home' %}">커뮤니티</a>
-      </div>
-  
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" >
-        <ul class="nav navbar-nav" id="myDIV">
-          <button class="btn"><a href="{% url 'agriculture:index' %}">농대</a></button>
-          <button class="btn"><a href="{% url 'business:index' %}">경영대</a></button>
-          <button class="btn"><a href="{% url 'electronic:index' %}">전자정보대</a></button>
-          <button class="btn"><a href="{% url 'engineer:index' %}">공대</a></button>
-          <button class="btn"><a href="{% url 'free:index' %}">자율전공</a></button>
-          <button class="btn"><a href="{% url 'human:index' %}">인문대</a></button>
-          <button class="btn"><a href="{% url 'life:index' %}">생활과학대</a></button>
-          <button class="btn"><a href="{% url 'nature:index' %}">자연과학대</a></button>
-          <button class="btn"><a href="{% url 'social:index' %}">사회과학대</a></button>
-          <button class="btn"><a href="{% url 'teach:index' %}"> 사범대 </a></button>
-
+    <nav class="navbar navbar-default">
+      <div class="container-fluid" >
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+          </button>
+          <a class="navbar-brand" href="{% url 'home' %}">커뮤니티</a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" >
+          <ul class="nav navbar-nav" id="myDIV">
+            <button class="btn"><a href="{% url 'agriculture:index' %}">농대</a></button>
+            <button class="btn"><a href="{% url 'business:index' %}">경영대</a></button>
+            <button class="btn"><a href="{% url 'electronic:index' %}">전자정보대</a></button>
+            <button class="btn"><a href="{% url 'engineer:index' %}">공대</a></button>
+            <button class="btn"><a href="{% url 'free:index' %}">자율전공</a></button>
+            <button class="btn"><a href="{% url 'human:index' %}">인문대</a></button>
+            <button class="btn"><a href="{% url 'life:index' %}">생활과학대</a></button>
+            <button class="btn"><a href="{% url 'nature:index' %}">자연과학대</a></button>
+            <button class="btn"><a href="{% url 'social:index' %}">사회과학대</a></button>
+            <button class="btn"><a href="{% url 'teach:index' %}"> 사범대 </a></button>
+          </ul>
           
-
-        </ul>
-        
-    </div><!-- /.container-fluid -->
-  </nav>
+      </div><!-- /.container-fluid -->
+    </nav>
 
 
   
@@ -99,7 +97,11 @@
       this.className += " active";
       });
     }
-    </script>
-  
+  </script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src ="{% static 'notify/notifyX.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>

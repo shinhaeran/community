@@ -1,13 +1,80 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Yeon+Sung&amp;subset=korean" rel="stylesheet">
+    <style>
+      p {
+        font-family: 'Yeon Sung', cursive;
+        font-size: 23px;
+      }
+      p.a {
+        font-weight: 400;
+      }
+      p.b {
+        font-weight: 700;
+      }
+      p.c {
+        font-weight: 800;
+      }
+      p.d {
+        font-weight: bold;
+      }
+    </style>
 {% extends 'base.html' %}
-
-{% block title %}engineer의 index{% endblock %} <!--얘는 그 head 에 쓰는 타이틀이에요-->
+<br>
+{% block title %}{% endblock %} <!--얘는 그 head 에 쓰는 타이틀이에요-->
 
 {% block content %}
-engineer's index
-{% for post in posts %}
-    <p><a href="{% url 'engineer:detail' post.id %}">{{post.title}}</a></p>
-{% endfor %}
-{% for post in posts %}
-    <p><a href="{% url 'engineer:detail' post.id %}">{{post.title}}</a></p>
-{% endfor %}
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col"><p>제목</p></th>
+      <th scope="col"><p>날짜</p></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  
+  {% for notice in notices %}
+    <tr>
+        <td>
+            <p><a href="{% url 'engineer:detail' notice.id %}">[전체공지]{{notice.title}}</a></p>
+        </td>
+        <td>
+            <p><a href="{% url 'engineer:detail' notice.id %}">{{notice.updated_at}}</p>
+        </td>
+    </tr>
+  {% endfor %}
+
+  {% for post in posts %}
+    <tr>
+      <td>
+        <p><a href="{% url 'engineer:detail' post.id %}">{{post.title}}</a></p>
+      </td>
+      <td>
+        <p><a href="{% url 'engineer:detail' post.id %}">{{post.updated_at}}</p>
+      </td>
+      <td></td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+<footer>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-5">
+    <br>
+    <br>
+    <br>
+    </div>
+    <div class="col">
+        <p class="a"><a href="{% url 'engineer:new' %}">글쓰기</a></p>      
+    </div>
+  </div>
+</div>
+</footer>
+
 {% endblock %}

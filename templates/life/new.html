@@ -1,12 +1,49 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Yeon+Sung&amp;subset=korean" rel="stylesheet">
+<style>
+    p {
+        font-family: 'Yeon Sung', cursive;
+        font-size: 23px;
+    }
+</style>
 {% extends 'base.html' %}
 
 {% block title %}life의 new{% endblock %} <!--얘는 그 head 에 쓰는 타이틀이에요-->
 
 {% block content %}
-<p>life의 new</p>
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="작성하기">
-</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"><p>생과대 카테고리 글쓰기</p></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <form method="POST">{% csrf_token %}
+                    <div class="new-form container">
+                        <label for="{{ form.title.id_for_label }}">TITLE:</label><br />
+                        <div class="form-title">
+                            {{ form.title }}<br />
+                        </div>
+                        <label for="{{ form.content.id_for_label }}">CONTENT:</label><br />
+                        <div class="form-content">
+                            {{ form.content }}<br />
+                        </div>
+                        {% if user.is_superuser %}
+                            <hr>
+                            <label for="{{ form.notice.id_for_label }}">NOTICE:</label><br />
+                            <div class="form-notice">
+                                <p>{{ form.notice }}이 글을 공지글로 게시하겠습니까?</p>
+                            </div>
+                        {% endif %}
+                        <div class="form-submit">
+                            <p><input type="submit" value="작성완료" /></p>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
 {% endblock %}

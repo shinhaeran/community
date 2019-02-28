@@ -2,33 +2,47 @@
 
 {% block title %}human의 detail{% endblock %} <!--얘는 그 head 에 쓰는 타이틀이에요-->
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 {% block content %}
     <p>human의 detail</p>
-    <a href="{% url 'human:edit' post.id %}">수정하기</a>
-    <a href="{% url 'human:delete' post.id %}">삭제하기</a>
-    <a href="{% url 'human:index' %}">목록으로</a>
-    <h1>제목:{{post.title|safe}}</h1>
-    <p>수정날짜:{{post.updated_at|safe}}</p>
-    <h2>내용:{{post.content|safe}}</h2>
-    <hr>
- 
-    {% for firstcomment in firstcomments %}
 
-    {% if firstcomment.text != '삭제된 댓글입니다' %}
-        <a href="{% url 'human:delete_comment' post.id firstcomment.id %}">삭제하기</a>
-        <input type="button" value="답글달기" onclick="reComment('{{firstcomment.id}}', 'human', '{{ csrf_token }}');">
-    {% endif %}
-    {{ firstcomment.text }}
+    <div class="btn-group">
+        {% if post.user.username == request.user.username %}
+            <a href="{% url 'human:edit' post.id %}" class="btn btn-default">수정하기</a>
+        {% endif %}
+        {% if request.user.is_superuser or post.user.username == request.user.username %}
+            <a href="{% url 'human:delete' post.id %}"  class="btn btn-default">삭제하기</a>
+        {% endif %}
+        <a href="{% url 'human:index' %}"  class="btn btn-default">목록으로</a>
+    </div>
+    <div class="page-header">
+            <h1>{{post.title|safe}} <small>{{post.updated_at|safe}}</small></h1>
+            <hr> <br>
+            <h3>{{post.content|safe}}</h3>
+          </div> <br><br><br>
     
-    <br>
-        {% for secondcomment in secondcomments %}
-            {% if secondcomment.parent == firstcomment.id %}
-            <a href="{% url 'human:delete_comment' post.id secondcomment.id %}">삭제하기</a>
-                &nbsp&nbsp⇒{{ secondcomment.text }}<br>
+  
+    {% for firstcomment in firstcomments %}
+        {{ firstcomment.text }}
+        {% if firstcomment.text != '삭제된 댓글입니다' %}
+            {% if firstcomment.user == request.user.username or request.user.is_superuser %}
+                <a class="glyphicon glyphicon-remove" aria-hidden="true" href="{% url 'human:delete_comment' post.id firstcomment.id %}" ></a>
             {% endif %}
-        {% endfor %}
-    <div id="{{firstcomment.id}}form"></div>
-{% endfor %}
+            <input type="button" value="답글달기" onclick="reComment('{{firstcomment.id}}', 'human', '{{ csrf_token }}');">
+        {% endif %}
+        
+        <br>
+            {% for secondcomment in secondcomments %}
+                {% if secondcomment.parent == firstcomment.id %}
+                    &nbsp&nbsp<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>{{ secondcomment.text }}
+                    {% if secondcomment.user == request.user.username or request.user.is_superuser %}
+                        <a class="glyphicon glyphicon-remove" aria-hidden="true" href="{% url 'human:delete_comment' post.id secondcomment.id %}" ></a>
+                        <br>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        <div id="{{firstcomment.id}}form"></div>
+    {% endfor %} <br> <hr>
 
     <form action="{% url 'human:addComment' post.id %}" method="POST">
         {% csrf_token %}

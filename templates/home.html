@@ -1,15 +1,135 @@
-{% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
-{% if user.is_authenticated %}
-  <br>
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a> |
-  <a href="{% url 'account:signup' %}">signup</a>
-{% endif %}
+{% load staticfiles %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Yeon+Sung&amp;subset=korean" rel="stylesheet">
+    <style>
+      p {
+        font-family: 'Yeon Sung', cursive;
+        font-size: 23px;
+      }
+      p.a {
+        font-weight: 400;
+      }
+      p.b {
+        font-weight: 700;
+      }
+      p.c {
+        font-weight: 800;
+      }
+      p.d {
+        font-weight: bold;
+      }
+    </style>
+{% block title %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <a class="nav-link active" href="{% url 'home' %}"><p class="b" >충북대학교 커뮤니티</p></a>
+    </div>
+  </div>
 {% endblock %}
+
+{% if user.is_authenticated %}  
+
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active" href="#"><p class="a">반갑습니다 {{ user.username }}님</p></a>
+  <p>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}"><p class="a">로그아웃</p></a>
+  </li>
+</ul>
+{% else %}
+<div class="alert alert-warning" role="alert">
+  권한이 없습니다.
+</div>
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'login' %}"><p class="a">로그인</p></a>
+  <p>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'account:signup' %}"><p class="a">회원가입</p></a>
+  </li>
+</ul>
+{% endif %}
+
+<body>
+  <div class="d-flex bd-highlight">
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'agriculture:index' %}">
+      <img src="{% static 'agriculture.png' %}" width="150" height="150"> 
+      </a>
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'business:index' %}">
+      <img src="{% static 'management.png' %}" width="150" height="150"> 
+      </a>  
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'electronic:index' %}">
+      <img src="{% static 'electronic.png' %}" width="150" height="150"> 
+      </a>  
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'engineer:index' %}">
+      <img src="{% static 'engineer.png' %}" width="150" height="150"> 
+      </a>
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'free:index' %}">
+      <img src="{% static 'free.png' %}" width="150" height="150"> 
+      </a>  
+    </div>
+  </div>
+
+  <div class="d-flex bd-highlight">
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'human:index' %}">
+      <img src="{% static 'human.png' %}" width="150" height="150"> 
+      </a>  
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'life:index' %}">
+      <img src="{% static 'life.png' %}" width="150" height="150"> 
+      </a>
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'nature:index' %}">
+      <img src="{% static 'nature.png' %}" width="150" height="150"> 
+      </a>  
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'social:index' %}">
+      <img src="{% static 'social.png' %}" width="150" height="150"> 
+      </a>  
+    </div>
+    <div class="p-2 flex-fill bd-highlight">
+      <a href="{% url 'teach:index' %}">
+      <img src="{% static 'teach.png' %}" width="150" height="150"> 
+      </a>  
+    </div>
+  </div>  
+
+
+</body>
+
+<footer>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-5">
+    <br>
+    <br>
+    <br>
+      <p class="a">7기 오프라인팀 &copy; 양동진 김미선 신혜란 노기진</p>      
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+</footer>

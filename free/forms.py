@@ -9,7 +9,7 @@ class FreePostForm(forms.ModelForm):
 
     title = forms.CharField(required=True, max_length=300,
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'new-title',
             'placeholder': 'Title',
         })
     )
@@ -25,7 +25,7 @@ class FreeAdminPostForm(forms.ModelForm):
         fields = ('notice', 'title', 'content',)
     title = forms.CharField(required=True, max_length=300,
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'new-title',
             'placeholder': 'Title',
         })
     )

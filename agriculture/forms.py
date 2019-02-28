@@ -14,7 +14,7 @@ class AgriculturePostForm(forms.ModelForm):
     # )
     title = forms.CharField(required=True, max_length=300,
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'new-title',
             'placeholder': 'Title',
         })
     )
@@ -27,10 +27,10 @@ class AgriculturePostForm(forms.ModelForm):
 class AgricultureAdminPostForm(forms.ModelForm):
     class Meta:
         model = AgriculturePost
-        fields = ('notice', 'title', 'content',)
+        fields = ('title', 'content', 'notice')
     title = forms.CharField(required=True, max_length=300,
         widget=forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'new-title',
             'placeholder': 'Title',
         })
     )
@@ -42,7 +42,7 @@ class AgricultureAdminPostForm(forms.ModelForm):
     # notice = forms.BooleanField(
     #     widget = forms.CheckboxInput(attrs={
     #         'class' : 'notice-control',
-    #         'disabled' : True,
+    #         'disabled' : False,
     #     })
     # )
 

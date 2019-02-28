@@ -1,0 +1,1 @@
+web: gunicorn cbnu_community.wsgi --log-file -

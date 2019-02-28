@@ -105,9 +105,13 @@ def add_comment_to_post(request, post_id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
+            comment.user = request.user.username
             comment.save()
-            notify.send(request.user, recipient=user, actor=request.user,
-                        verb='add comment your post : '+post.title, nf_type='add_comment')
+            
+            if request.user != user:
+                notify.send(request.user, recipient=user, actor=request.user, description='electronic',
+                    verb='add comment your post : '+post.title, target=post, nf_type='add_comment')
+
             return redirect('electronic:detail', post.id)
 
 @login_required
@@ -122,9 +126,13 @@ def add_comment_to_comment(request, comment_id):
             recomment.post = post
             recomment.parent = comment.id
             recomment.depth = 1
+            recomment.user = request.user.username
             recomment.save()
-            notify.send(request.user, recipient=user, actor=request.user,
-                        verb='add recomment your post : '+post.title, nf_type='add_comment')
+            
+            if request.user != user:
+                notify.send(request.user, recipient=user, actor=request.user, description='electronic',
+                    verb='add recomment your comment : '+post.title, target=post, nf_type='add_comment')
+
             return redirect('electronic:detail', post.id)
 
 @login_required

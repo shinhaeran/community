@@ -15,6 +15,7 @@ class TeachPost(models.Model):
 
 class TeachComment(models.Model):
     post = models.ForeignKey('TeachPost', on_delete=models.CASCADE, related_name='comments')
+    user = models.CharField(max_length=20, default=None)
     text = models.TextField()
     depth = models.IntegerField(default=0)
     parent = models.IntegerField(null=True)
